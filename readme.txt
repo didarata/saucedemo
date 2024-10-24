@@ -27,7 +27,8 @@ saucedemo-tests/
 │   │   └── resources/
 │   │       ├── features/
 │   │       │   └── cart_operations.feature
-│   │       └── cucumber.properties
+│   │       └── credentials.properties
+|   |       |__ user_data.properties
 ├── .gitlab-ci.yml
 └── README.md
 
@@ -50,7 +51,7 @@ mvn test
 
 To run tests with the debug profile, use:
 mvn test -Pdebug
-and than from Run and Debug (cntr+shift+D) start "Attacked to Maven cucumber Test"
+and then from Run and Debug (cntr+shift+D) start "Attacked to Maven cucumber Test" (For Vscode)
 
 To run tests with specific tags, use:
 -mvn test -D cucumber.filter.tags="@smoketest"
