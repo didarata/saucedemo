@@ -27,7 +27,8 @@ saucedemo-tests/
 │   │   └── resources/
 │   │       ├── features/
 │   │       │   └── cart_operations.feature
-│   │       └── cucumber.properties
+│   │       └── credentials.properties
+|   |       |__ user_data.properties
 ├── .gitlab-ci.yml
 └── README.md
 
