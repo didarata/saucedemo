@@ -1,0 +1,49 @@
+stages:
+  - build
+  - test
+  - e2e
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+before_script:
+  - echo "Setting up the environment"
+  - apt-get update -qq && apt-get install -qqy openjdk-17-jdk maven
+  - export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  - export PATH=$JAVA_HOME/bin:$PATH
+  - mvn --version
+
+build:
+  stage: build
+  script:
+    - echo "Building the project"
+    - mvn clean compile
+
+test:
+  stage: test
+  parallel:
+    matrix:
+      - TEST_GROUP: "unit"
+      - TEST_GROUP: "integration"
+  script:
+    - echo "Running $TEST_GROUP tests"
+    - if [ "$TEST_GROUP" = "unit" ]; then mvn test -Dtest=*UnitTest; fi
+    - if [ "$TEST_GROUP" = "integration" ]; then mvn test -Dtest=*IntegrationTest; fi
+
+e2e:
+  stage: e2e
+  parallel:
+    matrix:
+      - BROWSER: "chrome"
+      - BROWSER: "firefox"
+      - BROWSER: "safari"
+  script:
+    - echo "Running end-to-end tests on $BROWSER"
+    - mvn test -D cucumber.filter.tags="@e2e" -Dbrowser=$BROWSER
+  artifacts:
+    paths:
+      - target/cucumber-reports.html

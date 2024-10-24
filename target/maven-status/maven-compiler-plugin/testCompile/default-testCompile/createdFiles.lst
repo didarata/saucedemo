@@ -1,0 +1,5 @@
+com\example\pages\LoginPage.class
+com\example\CartOperationsStepDefinitions.class
+com\example\RunCucumberTest.class
+com\example\pages\ProductsPage.class
+com\example\SharedSteps.class
