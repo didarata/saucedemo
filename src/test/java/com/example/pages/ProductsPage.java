@@ -159,7 +159,6 @@ public class ProductsPage {
     }
 
     public double getProductPrice(String productName) {
-        String formattedProductName = formatProductName(productName);
         String priceText = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//div[contains(@class, 'inventory_item') and .//div[text()='"
                         + productName + "']]//div[@class='inventory_item_price']")))

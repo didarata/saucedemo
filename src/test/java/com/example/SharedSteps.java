@@ -2,7 +2,6 @@ package com.example;
 
 import com.example.pages.LoginPage;
 import com.example.pages.ProductsPage;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.WebDriver;

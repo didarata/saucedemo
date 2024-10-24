@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.AppConfig;
 import com.example.pages.LoginPage;
 import com.example.pages.ProductsPage;
 import io.cucumber.java.BeforeAll;
@@ -11,10 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public class CartOperationsStepDefinitions {
 
     @Given("I am logged in as {string}")
     public void i_am_logged_in_as(String user) {
-        driver.get("https://www.saucedemo.com/");
+        driver.get(AppConfig.getInstance().getBaseUrl());
         loginWithUser(user);
     }
 
@@ -99,7 +97,7 @@ public class CartOperationsStepDefinitions {
 
     @Then("they should be successfully added again to the cart")
     public void they_should_be_successfully_added_again_to_the_cart() {
-        String cartCount = productsPage.getCartBadge().getText();
+        var cartCount = productsPage.getCartBadge().getText();
         Assert.assertEquals(cartCount, "2", "Two products were not successfully added to the cart");
     }
 
@@ -150,8 +148,8 @@ public class CartOperationsStepDefinitions {
 
         double expectedTotalPrice = (product1Price + product2Price) * 1.08;
         expectedTotalPrice = Math.round(expectedTotalPrice * 100.0) / 100.0;
-        String expectedTotalPriceStr = String.format("%.2f", expectedTotalPrice);
-        String actualTotalPriceStr = String.format("%.2f", productsPage.getTotalPrice());
+        var expectedTotalPriceStr = String.format("%.2f", expectedTotalPrice);
+        var actualTotalPriceStr = String.format("%.2f", productsPage.getTotalPrice());
         Assert.assertEquals(actualTotalPriceStr, expectedTotalPriceStr, "Total price is incorrect");
     }
 
@@ -176,7 +174,6 @@ public class CartOperationsStepDefinitions {
     }
 
     public static void verifyLogout() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Assert.assertTrue(new LoginPage(driver).getLoginButtonWithWait().isDisplayed(),
                 "Login button is not displayed, logout failed");
     }
@@ -198,7 +195,7 @@ public class CartOperationsStepDefinitions {
     }
 
     private static void loginWithUser(String user) {
-        String password = credentials.getProperty(user);
+        var password = credentials.getProperty(user);
         loginPage.enterUsername(user);
         loginPage.enterPassword(password);
         loginPage.clickLoginButton();
