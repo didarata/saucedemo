@@ -4,33 +4,39 @@ The tests are designed to run in a CI/CD pipeline using GitLab CI.
 
 Project Structure:
 
-saucedemo-tests/
-├── pom.xml
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── App.java
-│   │   └── resources/
-│   │       └── application.properties
-│   ├── test/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           ├── RunCucumberTest.java
-│   │   │           ├── SharedSteps.java
-│   │   │           ├── CartOperationsStepDefinitions.java
-│   │   │           └── pages/
-│   │   │               ├── LoginPage.java
-│   │   │               └── ProductsPage.java
-│   │   └── resources/
-│   │       ├── features/
-│   │       │   └── cart_operations.feature
-│   │       └── credentials.properties
-|   |       |__ user_data.properties
+SAUCEDEMO-TESTS
+├── .settings
+├── .vscode
+│   ├── launch.json
+│   ├── settings.json
+├── bin
+├── src
+│   ├── main
+│   └── test
+│       ├── java
+│       │   └── com
+│       │       └── example
+│       │           ├── config
+│       │           │   └── AppConfig.java
+│       │           ├── pages
+│       │           │   ├── LoginPage.java
+│       │           │   ├── ProductsPage.java
+│       │           ├── CartOperationsStepDefinitions.java
+│       │           ├── RunCucumberTest.java
+│       │           └── SharedSteps.java
+│       ├── resources
+│           ├── features
+│           │   └── cart_operations.feature
+│           ├── config.properties
+│           ├── credentials.properties
+│           └── user_data.properties
+├── target
+├── .classpath
 ├── .gitlab-ci.yml
-└── README.md
+├── .project
+├── pom.xml
+├── readme.txt
+└── testng.xml
 
 Prerequisites:
 Java 17
